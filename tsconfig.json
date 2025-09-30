@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // FIXME: target 옛날부터 그냥 습관적으로 이렇게 쓰고 있는데 뭘로 해야 적절한가?
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "paths": {
+      "@/*": ["./src/"],
+      "@Components/*": ["./src/components/*"],
+      "@Styles/*": ["./src/styles/*"]
+    },
+    "typeRoots": ["node_modules/@types", "src/types"],
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}
