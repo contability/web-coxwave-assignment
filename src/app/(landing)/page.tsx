@@ -14,7 +14,7 @@ const LandingPage = () => {
 
         <div className="mb-12">
           <Link
-            href="/admin/management/users/cloud/list"
+            href="/event/list"
             className="inline-flex transform items-center rounded-lg border border-blue-600 bg-blue-600 px-8 py-4 text-lg font-medium text-white shadow-lg transition-all duration-200 hover:-translate-y-1 hover:bg-blue-700 hover:shadow-xl focus:ring-4 focus:ring-blue-300 focus:outline-none"
             role="button"
             aria-label="이벤트 조회 페이지로 이동"
