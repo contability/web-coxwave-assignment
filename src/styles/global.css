@@ -13,3 +13,9 @@
   font-size: 62.5%;
   -webkit-text-size-adjust: none;
 }
+
+@layer base {
+  .tsqd-parent-container {
+    font-size: 160%;
+  }
+}

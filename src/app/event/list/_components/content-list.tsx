@@ -1,10 +1,14 @@
 'use client';
 
-import { useProjectList } from '@Lib/services/project/client';
+import { useEventList, useProject, useProjectList } from '@Lib/services/project/client';
 
 const EventContentList = () => {
-  const result = useProjectList();
-  console.log(result);
+  const projectListResult = useProjectList();
+  console.log('🚀 ~ EventContentList ~ projectListResult:', projectListResult);
+  const s = useProject('project-1');
+  console.log('🚀 ~ EventContentList ~ s:', s);
+  const f = useEventList('project-1', 1, '');
+  console.log('🚀 ~ EventContentList ~ f:', f);
 
   return <div>TEST</div>;
 };
