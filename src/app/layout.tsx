@@ -1,3 +1,5 @@
+import ConnectTransportProvider from '@Components/providers/connect-transport-provider';
+import ReactQueryClientProvider from '@Components/providers/react-query-client-providers';
 import '@Styles/global.css';
 
 import { Metadata, Viewport } from 'next';
@@ -31,7 +33,11 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ConnectTransportProvider>
+          <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+        </ConnectTransportProvider>
+      </body>
     </html>
   );
 };
