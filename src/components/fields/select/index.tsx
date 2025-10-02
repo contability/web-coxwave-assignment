@@ -15,6 +15,7 @@ interface SelectProps<T> {
   setValue: (value: string) => void;
   labelField?: keyof T;
   valueField?: keyof T;
+  placeholder?: string;
 }
 
 type SelectOption = {
@@ -29,13 +30,14 @@ function Select<T>({
   isDisabled = false,
   labelField = 'label' as keyof T,
   valueField = 'value' as keyof T,
+  placeholder = 'Please select value.',
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const selectedOption =
     optionList.find(option => parseValue(option[valueField] as ParsableValue) === parseValue(value))?.[labelField] ||
-    'Please select value.';
+    placeholder;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -53,7 +55,7 @@ function Select<T>({
   };
 
   return (
-    <div className="relative w-full">
+    <div className={`relative ${className}`}>
       <button
         ref={buttonRef}
         onClick={() => !isDisabled && setIsOpen(!isOpen)}
@@ -63,7 +65,6 @@ function Select<T>({
           !value && 'text-gray-500',
           isOpen ? 'border-blue-500 ring-2 ring-blue-100' : 'border-gray-300',
           isDisabled ? 'cursor-not-allowed bg-gray-50 opacity-50' : '',
-          className,
         )}
         type="button"
         aria-haspopup="listbox"
@@ -81,7 +82,7 @@ function Select<T>({
       {isOpen && !isDisabled && (
         <ul
           role="listbox"
-          className="ring-opacity-5 absolute z-60 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black"
+          className="ring-opacity-5 absolute z-60 mt-1 max-h-60 w-fit overflow-auto rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black"
         >
           {optionList.map(option => {
             const optionValue = parseValue(option[valueField] as ParsableValue, { defaultValue: '' })!;
