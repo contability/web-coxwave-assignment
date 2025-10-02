@@ -15,6 +15,10 @@
 }
 
 @layer base {
+  button {
+    cursor: pointer;
+  }
+
   .tsqd-parent-container {
     font-size: 160%;
   }
