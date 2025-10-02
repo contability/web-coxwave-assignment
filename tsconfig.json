@@ -19,7 +19,8 @@
       "@/*": ["./"],
       "@Components/*": ["./components/*"],
       "@Styles/*": ["./styles/*"],
-      "@Lib/*": ["./lib/*"]
+      "@Lib/*": ["./lib/*"],
+      "@DataTypes/*": ["./types/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "plugins": [
