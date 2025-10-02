@@ -1,5 +1,7 @@
 'use client';
 
+import { twMerge } from 'tailwind-merge';
+
 interface ButtonProps {
   onClick: () => void;
   children: React.ReactNode;
@@ -9,12 +11,12 @@ interface ButtonProps {
 }
 
 const Button = ({ onClick, children, isSelected = false, className = '', type = 'button' }: ButtonProps) => {
-  const baseClasses = 'rounded px-3 py-1';
-  const selectedClasses = isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200';
-  const combinedClasses = `${baseClasses} ${selectedClasses} ${className}`.trim();
-
   return (
-    <button type={type} onClick={onClick} className={combinedClasses}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={twMerge('rounded px-3 py-1', isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200', className)}
+    >
       {children}
     </button>
   );
