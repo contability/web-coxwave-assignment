@@ -6,11 +6,10 @@ import { CustomDateRange } from '@DataTypes/date';
 
 interface DatePickerButtonProps {
   isSelected: boolean;
-  customDateRange: CustomDateRange | null;
   onDateRangeChange: (range: CustomDateRange | null) => void;
 }
 
-const DatePickerButton = ({ isSelected, customDateRange, onDateRangeChange }: DatePickerButtonProps) => {
+const DatePickerButton = ({ isSelected, onDateRangeChange }: DatePickerButtonProps) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [tempStartDate, setTempStartDate] = useState('');
   const [tempEndDate, setTempEndDate] = useState('');

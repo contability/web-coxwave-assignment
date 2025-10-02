@@ -3,19 +3,20 @@
 import { useEventList } from '@Lib/hooks/event';
 import { useProject } from '@Lib/hooks/project';
 import { useState } from 'react';
-import { formatTimestampReadable, getDateRangeFilter } from '@Lib/utils/date';
+import { getDateRangeFilter } from '@Lib/utils/date';
 import { DateRangeType, CustomDateRange } from '@DataTypes/date';
 import SearchFilters from './search-filters';
+import EventList from './event-list';
 
 const EventContentList = () => {
   const [projectId, setProjectId] = useState('');
   const [selectedDateRange, setSelectedDateRange] = useState<DateRangeType | null>(null);
-  const [customDateRange, setCustomDateRange] = useState<CustomDateRange | null>(null);
+  const [customDateRangeValue, setCustomDateRangeValue] = useState<CustomDateRange | null>(null);
 
   const projectResult = useProject(projectId);
   const timeZone = projectResult.data?.project?.timeZone?.id;
   const dateFilter = selectedDateRange
-    ? getDateRangeFilter(selectedDateRange, timeZone, customDateRange ?? undefined)
+    ? getDateRangeFilter(selectedDateRange, timeZone, customDateRangeValue ?? undefined)
     : '';
   const eventListResult = useEventList(1, '', projectId, dateFilter);
 
@@ -26,32 +27,9 @@ const EventContentList = () => {
         setProjectId={setProjectId}
         selectedDateRange={selectedDateRange}
         setSelectedDateRange={setSelectedDateRange}
-        customDateRange={customDateRange}
-        setCustomDateRange={setCustomDateRange}
+        setCustomDateRangeValue={setCustomDateRangeValue}
       />
-      <section aria-label="event-list-section">
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Type</th>
-              <th>Create Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            {eventListResult.data?.events?.map(event => {
-              const createTime = formatTimestampReadable(event.createTime, timeZone);
-              return (
-                <tr key={event.id}>
-                  <td>{event.id}</td>
-                  <td>{event.type}</td>
-                  <td>{createTime}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </section>
+      <EventList events={eventListResult.data?.events ?? []} timeZone={timeZone} />
     </div>
   );
 };

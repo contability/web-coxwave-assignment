@@ -11,8 +11,7 @@ interface SearchFiltersProps {
   setProjectId: (value: string) => void;
   selectedDateRange: DateRangeType | null;
   setSelectedDateRange: (rangeType: DateRangeType | null) => void;
-  customDateRange: CustomDateRange | null;
-  setCustomDateRange: (range: CustomDateRange | null) => void;
+  setCustomDateRangeValue: (range: CustomDateRange | null) => void;
 }
 
 const SearchFilters = ({
@@ -20,27 +19,26 @@ const SearchFilters = ({
   setProjectId,
   selectedDateRange,
   setSelectedDateRange,
-  customDateRange,
-  setCustomDateRange,
+  setCustomDateRangeValue,
 }: SearchFiltersProps) => {
   const projectListResult = useProjectList();
 
   const handleDateRange = (rangeType: DateRangeType) => {
     setSelectedDateRange(rangeType);
     if (rangeType !== 'custom') {
-      setCustomDateRange(null);
+      setCustomDateRangeValue(null);
     }
   };
 
   const handleCustomDateRangeChange = (range: CustomDateRange | null) => {
-    setCustomDateRange(range);
+    setCustomDateRangeValue(range);
     if (range) {
       setSelectedDateRange('custom');
     }
   };
 
   return (
-    <section aria-label="search-filter-section" onSubmit={e => e.preventDefault()} className="flex gap-6">
+    <section aria-label="search-filter-section" className="mb-4 flex gap-6">
       <Select
         optionList={projectListResult.data?.projects ?? []}
         value={projectId}
@@ -72,11 +70,7 @@ const SearchFilters = ({
         <Button isSelected={selectedDateRange === '12m'} onClick={() => handleDateRange('12m')}>
           12M
         </Button>
-        <DatePickerButton
-          isSelected={selectedDateRange === 'custom'}
-          customDateRange={customDateRange}
-          onDateRangeChange={handleCustomDateRangeChange}
-        />
+        <DatePickerButton isSelected={selectedDateRange === 'custom'} onDateRangeChange={handleCustomDateRangeChange} />
       </div>
     </section>
   );

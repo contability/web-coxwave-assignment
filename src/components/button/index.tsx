@@ -15,7 +15,11 @@ const Button = ({ onClick, children, isSelected = false, className = '', type = 
     <button
       type={type}
       onClick={onClick}
-      className={twMerge('rounded px-3 py-1', isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200', className)}
+      className={twMerge(
+        'rounded px-3 py-1 text-base',
+        isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200',
+        className,
+      )}
     >
       {children}
     </button>
