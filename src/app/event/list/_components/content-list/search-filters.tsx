@@ -2,21 +2,41 @@
 
 import Select from '@Components/fields/select';
 import Button from '@Components/button';
+import DatePickerButton from '@Components/fields/date-picker-button';
 import { useProjectList } from '@Lib/hooks/project';
-import { DateRangeType } from '@DataTypes/date';
+import { DateRangeType, CustomDateRange } from '@DataTypes/date';
 
 interface SearchFiltersProps {
   projectId: string;
   setProjectId: (value: string) => void;
   selectedDateRange: DateRangeType | null;
   setSelectedDateRange: (rangeType: DateRangeType | null) => void;
+  customDateRange: CustomDateRange | null;
+  setCustomDateRange: (range: CustomDateRange | null) => void;
 }
 
-const SearchFilters = ({ projectId, setProjectId, selectedDateRange, setSelectedDateRange }: SearchFiltersProps) => {
+const SearchFilters = ({
+  projectId,
+  setProjectId,
+  selectedDateRange,
+  setSelectedDateRange,
+  customDateRange,
+  setCustomDateRange,
+}: SearchFiltersProps) => {
   const projectListResult = useProjectList();
 
   const handleDateRange = (rangeType: DateRangeType) => {
     setSelectedDateRange(rangeType);
+    if (rangeType !== 'custom') {
+      setCustomDateRange(null);
+    }
+  };
+
+  const handleCustomDateRangeChange = (range: CustomDateRange | null) => {
+    setCustomDateRange(range);
+    if (range) {
+      setSelectedDateRange('custom');
+    }
   };
 
   return (
@@ -52,6 +72,11 @@ const SearchFilters = ({ projectId, setProjectId, selectedDateRange, setSelected
         <Button isSelected={selectedDateRange === '12m'} onClick={() => handleDateRange('12m')}>
           12M
         </Button>
+        <DatePickerButton
+          isSelected={selectedDateRange === 'custom'}
+          customDateRange={customDateRange}
+          onDateRangeChange={handleCustomDateRangeChange}
+        />
       </div>
     </section>
   );
