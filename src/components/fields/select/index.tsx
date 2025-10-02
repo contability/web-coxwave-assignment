@@ -82,7 +82,7 @@ function Select<T>({
       {isOpen && !isDisabled && (
         <ul
           role="listbox"
-          className="ring-opacity-5 absolute z-60 mt-1 max-h-60 w-fit overflow-auto rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black"
+          className="ring-opacity-5 absolute z-60 mt-1 max-h-60 w-full min-w-fit overflow-auto rounded-md border border-gray-200 bg-white py-1 shadow-lg ring-1 ring-black"
         >
           {optionList.map(option => {
             const optionValue = parseValue(option[valueField] as ParsableValue, { defaultValue: '' })!;
